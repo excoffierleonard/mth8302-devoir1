@@ -1,0 +1,98 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{etoolbox}
+\usepackage{xcolor}
+\usepackage{listings}
+
+% Code listing style for Python
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue!70!black}\bfseries,
+  commentstyle=\color{green!40!black}\itshape,
+  stringstyle=\color{orange!70!black},
+  numbers=left,
+  numberstyle=\scriptsize\color{gray!70},
+  stepnumber=1,
+  numbersep=10pt,
+  frame=single,
+  framerule=0.3pt,
+  rulecolor=\color{gray!40},
+  backgroundcolor=\color{gray!5},
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  tabsize=4,
+  columns=fullflexible,
+  keepspaces=true,
+  xleftmargin=12pt,
+  xrightmargin=6pt,
+  aboveskip=8pt,
+  belowskip=8pt,
+  captionpos=b
+}
+
+\lstset{style=pythonstyle}
+
+
+% Start each section on a new page
+\pretocmd{\section}{\clearpage}{}{}
+
+% Remove section numbering
+\setcounter{secnumdepth}{0}
+
+
+\title{MTH8302 - Devoir 1: Rappel Mathématique}
+\author{Leonard Excoffier}
+\date{Hiver 2026}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Problème 1: Gradients et Hessiennes}
+\subsection*{Exemple de code Python}
+\lstinputlisting[caption={Exemple Python (main.py)}]{../src/main.py}
+
+\subsection{Question 1}
+\subsection{Question 2}
+\subsection{Question 3}
+\subsection{Question 4}
+\subsection{Question 5}
+\subsection{Question 6}
+
+\section{Problème 2: Optimisation, Descentes de Gradient vs Newton et analyse spectrale}
+\subsection{a}
+\subsection{b}
+\subsection{c}
+\subsection{d}
+\subsection{e}
+\subsection{f}
+\subsection{g}
+
+\section{Problème 3: Estimation par la Méthode du Maximum de Vraisemblance et Probabilités des Estimateurs}
+\subsection{a}
+\subsection{b}
+\subsection{c}
+\subsection{d}
+
+\section{Problème 4: Test F de Fisher et Intervalle de Confiance}
+\subsection{a}
+\subsection{b}
+\subsection{c}
+\subsection{d}
+
+
+\section{Problème 5: Loi des Grands Nombres et Théorème Central Limite}
+\subsection{Question 1}
+\subsection{Question 2}
+\subsection{Question 3}
+
+
+\end{document}
