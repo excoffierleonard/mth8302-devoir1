@@ -12,7 +12,7 @@ def main():
     n_list = [50, 500, 5000]  # Nombre d'échantillons
     num_trials = 2000  # Nombre de répétitions
 
-    fig, axes = plt.subplots(1, len(n_list), figsize=(15, 5))
+    fig, axes = plt.subplots(1, len(n_list), figsize=(15, 5), sharex=True)
 
     for ax, n in zip(axes, n_list):
         # Génération des variables de Bernoulli
