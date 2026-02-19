@@ -26,13 +26,17 @@ def main():
     ci_lower = f_stat / f_upper
     ci_upper = f_stat / f_lower
 
-    print(f"Variance A (s^2_A) = {var_a:.6f}")
-    print(f"Variance B (s^2_B) = {var_b:.6f}")
-    print(f"F_stat = {f_stat:.6f}")
-    print(f"F_0.025 = {f_lower:.6f}")
-    print(f"F_0.975 = {f_upper:.6f}")
-    print(f"p-value = {p_value:.6f}")
-    print(f"IC 95% du ratio (sigma_A^2 / sigma_B^2) = [{ci_lower:.6f}, {ci_upper:.6f}]")
+    output_lines = [
+        f"Variance A (s^2_A) = {var_a:.6f}",
+        f"Variance B (s^2_B) = {var_b:.6f}",
+        f"F_stat = {f_stat:.6f}",
+        f"F_0.025 = {f_lower:.6f}",
+        f"F_0.975 = {f_upper:.6f}",
+        f"p-value = {p_value:.6f}",
+        f"IC 95% du ratio (sigma_A^2 / sigma_B^2) = [{ci_lower:.6f}, {ci_upper:.6f}]",
+    ]
+    with open("output/4.txt", "w", encoding="utf-8") as f_out:
+        f_out.write("\n".join(output_lines) + "\n")
 
     # Trace de la distribution F et region critique
     x_max = max(8.0, f_upper * 1.2)
