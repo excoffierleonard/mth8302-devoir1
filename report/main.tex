@@ -7,6 +7,7 @@
 \usepackage{url}
 \usepackage{etoolbox}
 \usepackage{xcolor}
+\usepackage{amsmath}
 \usepackage{listings}
 
 % Code listing style for Python
@@ -47,7 +48,7 @@
 \setcounter{secnumdepth}{0}
 
 
-\title{MTH8302 - Devoir 1: Rappel Mathématique}
+\title{MTH8302~- Devoir 1: Rappel Mathématique}
 \author{Leonard Excoffier}
 \date{Hiver 2026}
 
@@ -56,6 +57,9 @@
 \maketitle
 
 \tableofcontents
+
+\section*{Introduction}
+Le dépôt GitHub~\cite{repo} contient le code complet, structuré et prêt à être exécuté; il est plus simple de l'utiliser directement plutôt que de copier-coller les extraits.
 
 \section{Problème 1: Gradients et Hessiennes}
 \subsection*{Exemple de code Python}
@@ -84,10 +88,40 @@
 \subsection{d}
 
 \section{Problème 4: Test F de Fisher et Intervalle de Confiance}
+
 \subsection{a}
+\textbf{Hypothèses.} On teste
+\(H_0: \sigma_A^2 = \sigma_B^2\) contre \(H_1: \sigma_A^2 \neq \sigma_B^2\) (test bilatéral), avec \(\alpha = 0.05\).
+
+Les variances d'échantillon calculées sont \(s_A^2 = 16.988889\) et \(s_B^2 = 10.266667\), d'où la statistique \(F_{\text{stat}} = s_A^2 / s_B^2 = 1.654762\).
+Les valeurs critiques pour \((\nu_1, \nu_2) = (9, 9)\) sont \(F_{0.025} = 0.248386\) et \(F_{0.975} = 4.025994\), et la p-valeur vaut \(0.464710\).
+Comme \(F_{\text{stat}}\) est dans la région d'acceptation et \(p > 0.05\), on ne rejette pas \(H_0\): il n'y a pas d'évidence d'une différence de variances au seuil de 5\%.
+
 \subsection{b}
+  \begin{figure}[h]
+  \centering
+  \includegraphics[width=0.85\textwidth]{../output/4.png}
+  \caption{Distribution \(F(9,9)\) avec les zones critiques et la statistique observée \(F_{\text{stat}}\).}%
+  \label{fig:fisher-f}
+\end{figure}
+
+La figure~\ref{fig:fisher-f} montre la densité \(F(9,9)\), les régions critiques (en rouge) et la position de \(F_{\text{stat}}\), qui se situe hors des zones de rejet.
 \subsection{c}
+\textbf{Intervalle de confiance à 95\% pour \(\sigma_A^2 / \sigma_B^2\).}
+En utilisant les quantiles \(F_{0.025}\) et \(F_{0.975}\), l'intervalle est
+\[
+\left[\frac{F_{\text{stat}}}{F_{0.975}}, \frac{F_{\text{stat}}}{F_{0.025}}\right]=[0.411019,\; 6.662062].
+\]
+
 \subsection{d}
+\textbf{Code et sortie.} Le code source est fourni au listing~\ref{lst:fisher-code} et la sortie correspondante au listing~\ref{lst:fisher-output}.
+
+\lstinputlisting[caption={Code Python pour le test F et l'intervalle de confiance (src/4.py)}, label={lst:fisher-code}]{../src/4.py}
+
+\lstinputlisting[caption={Sortie du programme (output/4.txt)}, label={lst:fisher-output}, numbers=none, basicstyle=\ttfamily\small]{../output/4.txt}
+
+\textbf{Interprétation.} L'intervalle de confiance contient la valeur \(1\), donc un ratio \(\sigma_A^2 / \sigma_B^2 = 1\) est plausible.
+Cette conclusion est cohérente avec le test F qui ne rejette pas \(H_0\).
 
 
 \section{Problème 5: Loi des Grands Nombres et Théorème Central Limite}
@@ -97,7 +131,7 @@
 
 \begin{thebibliography}{9}
 \bibitem{repo}
-Leonard Excoffier. \emph{MTH8302 - Devoir 1: Rappel Mathématique}. GitHub repository.
+Leonard Excoffier.~\emph{MTH8302~- Devoir 1: Rappel Mathématique}.\ GitHub repository.
 \url{https://github.com/excoffierleonard/mth8302-devoir1.git}. Consulté le 18 février 2026.
 \end{thebibliography}
 
