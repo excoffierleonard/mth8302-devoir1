@@ -23,9 +23,7 @@ def main():
 
         final_means = means[:, -1]  # Moyenne
 
-        ax.hist(
-            final_means, bins=20, density=True, alpha=0.6, color="b", edgecolor="black"
-        )
+        ax.hist(final_means, bins=20, density=True, alpha=0.6, color="b", edgecolor="black")
         ax.axvline(0.5, color="red", linestyle="dashed", label=r"$\mathbb{E}[X] = 0.5$")
         ax.set_title(rf"$n = {n}$")
 

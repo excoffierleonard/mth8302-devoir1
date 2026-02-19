@@ -19,29 +19,15 @@ def main():
         sample_means = np.mean(X_tcl, axis=1)
 
         ax.hist(
-            sample_means,
-            bins=20,
-            density=True,
-            alpha=0.6,
-            color="g",
-            edgecolor="black",
-            label="Moyennes empiriques",
+            sample_means, bins=20, density=True, alpha=0.6, color="g", edgecolor="black", label="Moyennes empiriques"
         )
 
         # Superposition d'une distribution normale
         mu, sigma = 0.5, np.sqrt(0.5 * 0.5 / n)
         x_vals = np.linspace(0.3, 0.7, 100)
-        ax.plot(
-            x_vals,
-            stats.norm.pdf(x_vals, mu, sigma),
-            color="red",
-            lw=2,
-            label="Densité normale",
-        )
+        ax.plot(x_vals, stats.norm.pdf(x_vals, mu, sigma), color="red", lw=2, label="Densité normale")
 
-        ax.axvline(
-            0.5, color="black", linestyle="dashed", label=r"$\mathbb{E}[X] = 0.5$"
-        )
+        ax.axvline(0.5, color="black", linestyle="dashed", label=r"$\mathbb{E}[X] = 0.5$")
         ax.set_title(f"$n={n}$")
 
     axes[0].set_ylabel("Densité")

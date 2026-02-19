@@ -10,3 +10,12 @@ dependencies = [
     "scipy>=1.17.0",
     "seaborn>=0.13.2",
 ]
+
+[tool.black]
+line-length = 180
+
+[tool.ruff]
+line-length = 180
+
+[tool.pylint.format]
+max-line-length = 180
