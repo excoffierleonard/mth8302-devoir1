@@ -8,11 +8,15 @@
 \usepackage{etoolbox}
 \usepackage{xcolor}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
 \usepackage{listings}
+\usepackage{listingsutf8}
 
 % Code listing style for Python
 \lstdefinestyle{pythonstyle}{
   language=Python,
+  inputencoding=utf8/latin1,
   basicstyle=\ttfamily\small,
   keywordstyle=\color{blue!70!black}\bfseries,
   commentstyle=\color{green!40!black}\itshape,
@@ -98,10 +102,10 @@ Les valeurs critiques pour \((\nu_1, \nu_2) = (9, 9)\) sont \(F_{0.025} = 0.2483
 Comme \(F_{\text{stat}}\) est dans la région d'acceptation et \(p > 0.05\), on ne rejette pas \(H_0\): il n'y a pas d'évidence d'une différence de variances au seuil de 5\%.
 
 \subsection{b}
-  \begin{figure}[h]
+  \begin{figure}[H]
   \centering
   \includegraphics[width=0.85\textwidth]{../output/4.png}
-  \caption{Distribution \(F(9,9)\) avec les zones critiques et la statistique observée \(F_{\text{stat}}\).}%
+  \caption{Distribution \(F(9,9)\) avec les zones critiques et la statistique observée \(F_{\text{stat}}\) (output/4.png).}%
   \label{fig:fisher-f}
 \end{figure}
 
@@ -125,9 +129,71 @@ Cette conclusion est cohérente avec le test F qui ne rejette pas \(H_0\).
 
 
 \section{Problème 5: Loi des Grands Nombres et Théorème Central Limite}
+
+On simule une variable aléatoire $X \sim \text{Bernoulli}(p = 0{,}5)$ et on étudie le comportement de la moyenne empirique $\overline{X}_n = \frac{1}{n}\sum_{i=1}^{n} X_i$ lorsque $n$ augmente.
+
 \subsection{Question 1}
+
+\textbf{Influence de $n$ sur la dispersion de $\overline{X}_n$ (loi faible des grands nombres).}
+
+On répète $2000$ fois le calcul de $\overline{X}_n$ pour $n \in \{50,\; 500,\; 5000\}$ et on trace l'histogramme des moyennes obtenues.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{../output/5_1.png}
+  \caption{Distribution de $\overline{X}_n$ pour $n = 50$, $500$ et $5000$ ($2000$ répétitions) (output/5\_1.png).}%
+  \label{fig:lfgn}
+\end{figure}
+
+La figure~\ref{fig:lfgn} montre que lorsque $n$ augmente, la distribution de $\overline{X}_n$ se concentre de plus en plus autour de $\mathbb{E}[X] = 0{,}5$.
+Concrètement, la variance de $\overline{X}_n$ est $\text{Var}(\overline{X}_n) = \frac{p(1-p)}{n} = \frac{0{,}25}{n}$, qui décroît en $1/n$.
+Pour $n = 50$ l'histogramme est large (écart-type $\approx 0{,}071$), pour $n = 500$ il est nettement plus étroit ($\approx 0{,}022$), et pour $n = 5000$ les valeurs sont quasiment toutes égales à $0{,}5$ ($\approx 0{,}007$).
+Cela illustre la \textbf{loi faible des grands nombres}: $\overline{X}_n \xrightarrow{P} \mathbb{E}[X]$ lorsque $n \to \infty$.
+
+\lstinputlisting[caption={Code Python~- Loi faible des grands nombres (src/5\_1.py)}, label={lst:5~-1}]{../src/5_1.py}
+
 \subsection{Question 2}
+
+\textbf{Trajectoires individuelles de $\overline{X}_n$ (loi forte des grands nombres).}
+
+On fixe $n = 1000$ et on trace les trajectoires de la moyenne cumulative $\overline{X}_k$ ($k = 1, \dots, n$) pour $N_{\text{rep}} \in \{1,\; 5,\; 10,\; 1000\}$ répétitions.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{../output/5_2.png}
+  \caption{Trajectoires de $\overline{X}_n$ en fonction de $n$ pour différents nombres de répétitions (output/5\_2.png).}%
+  \label{fig:lfortegn}
+\end{figure}
+
+La figure~\ref{fig:lfortegn} montre que, quel que soit le nombre de répétitions, \textbf{chaque trajectoire individuelle converge vers} $\mathbb{E}[X] = 0{,}5$ lorsque $n$ grandit.
+Même avec une seule trajectoire ($N_{\text{rep}} = 1$), la moyenne cumulative se stabilise autour de $0{,}5$ pour $n$ suffisamment grand.
+En augmentant le nombre de répétitions, on observe un faisceau de trajectoires qui se resserre autour de $0{,}5$: les fluctuations initiales sont grandes, mais elles s'amortissent toutes de la même façon.
+Cela illustre la \textbf{loi forte des grands nombres}: $\overline{X}_n \xrightarrow{\text{p.s.}} \mathbb{E}[X]$, c'est-à-dire que la convergence a lieu pour \emph{presque toute} réalisation, et non seulement en probabilité.
+
+\lstinputlisting[caption={Code Python~- Loi forte des grands nombres (src/5\_2.py)}, label={lst:5~-2}]{../src/5_2.py}
+
 \subsection{Question 3}
+
+\textbf{Convergence vers la densité normale (théorème central limite).}
+
+On calcule $\overline{X}_n$ sur $500$ répétitions pour $n \in \{100,\; 1000,\; 10\,000\}$ et on superpose la densité de la loi $\mathcal{N}\!\left(0{,}5,\; \frac{p(1-p)}{n}\right)$.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{../output/5_3.png}
+  \caption{Distribution de $\overline{X}_n$ comparée à la densité normale théorique pour $n = 100$, $1000$ et $10\,000$ (output/5\_3.png).}%
+  \label{fig:tcl}
+\end{figure}
+
+La figure~\ref{fig:tcl} montre que l'histogramme des moyennes empiriques épouse de mieux en mieux la courbe de la densité normale (en rouge) à mesure que $n$ augmente.
+Dès $n = 100$ la forme est approximativement gaussienne; pour $n = 1000$ et surtout $n = 10\,000$ la correspondance est excellente.
+L'histogramme converge donc vers la densité de la loi \textbf{normale} $\mathcal{N}\!\left(\mu,\; \sigma^2/n\right)$ avec $\mu = p = 0{,}5$ et $\sigma^2 = p(1-p) = 0{,}25$.
+Cela illustre le \textbf{théorème central limite}:
+\[
+\sqrt{n}\,\frac{\overline{X}_n - \mu}{\sigma} \xrightarrow{\mathcal{L}} \mathcal{N}(0, 1).
+\]
+
+\lstinputlisting[caption={Code Python~- Th{\'e}or{\`e}me central limite (src/5\_3.py)}, label={lst:5-3}]{../src/5_3.py}
 
 \begin{thebibliography}{9}
 \bibitem{repo}
