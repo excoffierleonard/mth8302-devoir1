@@ -45,11 +45,11 @@ def main():
 
     plt.figure(figsize=(8, 4.5))
     plt.plot(x, y, color="navy", lw=2, label=f"F({df1}, {df2})")
-    plt.fill_between(x, y, where=(x <= f_lower), color="red", alpha=0.3, label="Zone critique (\u03b1/2)")
-    plt.fill_between(x, y, where=(x >= f_upper), color="red", alpha=0.3)
+    plt.fill_between(x, y, where=(x <= f_lower), color="red", alpha=0.3, label="Zone critique (\u03b1/2)")  # type: ignore
+    plt.fill_between(x, y, where=(x >= f_upper), color="red", alpha=0.3)  # type: ignore
     plt.axvline(f_stat, color="black", linestyle="--", lw=1.5, label=f"Fstat = {f_stat:.3f}")
-    plt.axvline(f_lower, color="red", linestyle=":", lw=1.2, label=f"F0.025 = {f_lower:.3f}")
-    plt.axvline(f_upper, color="red", linestyle=":", lw=1.2, label=f"F0.975 = {f_upper:.3f}")
+    plt.axvline(f_lower, color="red", linestyle=":", lw=1.2, label=f"F0.025 = {f_lower:.3f}")  # type: ignore
+    plt.axvline(f_upper, color="red", linestyle=":", lw=1.2, label=f"F0.975 = {f_upper:.3f}")  # type: ignore
     plt.title("Test F de Fisher : region critique et statistique observee")
     plt.xlabel("Valeur de F")
     plt.ylabel("Densite")
