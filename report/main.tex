@@ -66,15 +66,97 @@
 Le dépôt GitHub~\cite{repo} contient le code complet, structuré et prêt à être exécuté; il est plus simple de l'utiliser directement plutôt que de copier-coller les extraits.
 
 \section{Problème 1: Gradients et Hessiennes}
-\subsection*{Exemple de code Python}
-\lstinputlisting[caption={Exemple Python (main.py)}]{../src/main.py}
 
 \subsection{Question 1}
+
+Soit $f(\mathbf{x}) = \frac{1}{2}\mathbf{x}^\top \mathbf{A}\mathbf{x} + \mathbf{b}^\top\mathbf{x} + c$ avec $\mathbf{A}$ symétrique.
+
+\textbf{Réponse~: (b)} $\nabla_{\mathbf{x}} f(\mathbf{x}) = \mathbf{A}\mathbf{x} + \mathbf{b}$.
+
+\textbf{Justification.}
+On applique les règles de dérivation matricielle terme à terme~:
+\begin{itemize}
+  \item Forme quadratique~: $\frac{\partial}{\partial \mathbf{x}}(\mathbf{x}^\top\mathbf{A}\mathbf{x}) = (\mathbf{A} + \mathbf{A}^\top)\mathbf{x} = 2\mathbf{A}\mathbf{x}$ car $\mathbf{A}^\top = \mathbf{A}$.
+  \item Terme linéaire~: $\frac{\partial}{\partial \mathbf{x}}(\mathbf{b}^\top\mathbf{x}) = \mathbf{b}$ (dérivée de $\mathbf{b}^\top\mathbf{A}\mathbf{x}$ avec $\mathbf{A} = \mathbf{I}$).
+  \item Constante~: $\frac{\partial c}{\partial \mathbf{x}} = \mathbf{0}$.
+\end{itemize}
+D'où
+\[
+\nabla_{\mathbf{x}} f(\mathbf{x}) = \tfrac{1}{2}\cdot 2\mathbf{A}\mathbf{x} + \mathbf{b} = \boxed{\mathbf{A}\mathbf{x} + \mathbf{b}}.
+\]
+
 \subsection{Question 2}
+
+Même fonction $f(\mathbf{x}) = \frac{1}{2}\mathbf{x}^\top \mathbf{A}\mathbf{x} + \mathbf{b}^\top\mathbf{x} + c$.
+
+\textbf{Réponse~: (a)} $\nabla^2_{\mathbf{x}} f(\mathbf{x}) = \mathbf{A}$.
+
+\textbf{Justification.}
+Le gradient est $\nabla f(\mathbf{x}) = \mathbf{A}\mathbf{x} + \mathbf{b}$. On dérive une seconde fois~:
+\[
+\nabla^2_{\mathbf{x}} f(\mathbf{x}) = \frac{\partial}{\partial \mathbf{x}}(\mathbf{A}\mathbf{x} + \mathbf{b}) = \boxed{\mathbf{A}}.
+\]
+
 \subsection{Question 3}
+
+Soit $f(\mathbf{x}) = e^{\mathbf{x}^\top\mathbf{A}\mathbf{x}}$ avec $\mathbf{A}$ symétrique.
+
+\textbf{Réponse~: (b)} $\nabla f(\mathbf{x}) = 2e^{\mathbf{x}^\top\mathbf{A}\mathbf{x}}\mathbf{A}\mathbf{x}$.
+
+\textbf{Justification.}
+On pose $h(\mathbf{x}) = \mathbf{x}^\top\mathbf{A}\mathbf{x}$ de sorte que $f = e^{h}$. Par la règle de la dérivée en chaîne~:
+\[
+\nabla f = e^{h}\,\nabla h.
+\]
+Or $\nabla h = (\mathbf{A}+\mathbf{A}^\top)\mathbf{x} = 2\mathbf{A}\mathbf{x}$ ($\mathbf{A}$ symétrique), d'où
+\[
+\nabla f(\mathbf{x}) = \boxed{2e^{\mathbf{x}^\top\mathbf{A}\mathbf{x}}\,\mathbf{A}\mathbf{x}}.
+\]
+
 \subsection{Question 4}
+
+Même fonction $f(\mathbf{x}) = e^{\mathbf{x}^\top\mathbf{A}\mathbf{x}}$.
+
+\textbf{Réponse~: (a)} $\nabla^2_{\mathbf{x}} f(\mathbf{x}) = e^{\mathbf{x}^\top\mathbf{A}\mathbf{x}}(2\mathbf{A} + 4\mathbf{A}\mathbf{x}\mathbf{x}^\top\mathbf{A})$.
+
+\textbf{Justification.}
+On a $\nabla f(\mathbf{x}) = 2e^{\mathbf{x}^\top\mathbf{A}\mathbf{x}}\,\mathbf{A}\mathbf{x}$. La Hessienne est le Jacobien du gradient. Par la règle du produit matriciel appliquée à $\mathbf{g}(\mathbf{x}) = u(\mathbf{x})\,\mathbf{v}(\mathbf{x})$ avec $u = 2e^{\mathbf{x}^\top\mathbf{A}\mathbf{x}}$ (scalaire) et $\mathbf{v} = \mathbf{A}\mathbf{x}$ (vecteur)~:
+\[
+\frac{\partial \mathbf{g}}{\partial \mathbf{x}} = \mathbf{v}\,\frac{\partial u}{\partial \mathbf{x}}^\top + u\,\frac{\partial \mathbf{v}}{\partial \mathbf{x}}.
+\]
+On a $\frac{\partial u}{\partial \mathbf{x}} = 2u\,\mathbf{A}\mathbf{x}$ (d'après Q3 sans le facteur 2 initial, soit $4e^{\mathbf{x}^\top\mathbf{A}\mathbf{x}}\mathbf{A}\mathbf{x}$) et $\frac{\partial \mathbf{v}}{\partial \mathbf{x}} = \mathbf{A}$. Donc~:
+\[
+\nabla^2 f = (\mathbf{A}\mathbf{x})(4e^{\mathbf{x}^\top\mathbf{A}\mathbf{x}}\mathbf{A}\mathbf{x})^\top + 2e^{\mathbf{x}^\top\mathbf{A}\mathbf{x}}\mathbf{A} % chktex 3
+= e^{\mathbf{x}^\top\mathbf{A}\mathbf{x}}\bigl(4\mathbf{A}\mathbf{x}\mathbf{x}^\top\mathbf{A} + 2\mathbf{A}\bigr).
+\]
+\[
+\boxed{\nabla^2_{\mathbf{x}} f(\mathbf{x}) = e^{\mathbf{x}^\top\mathbf{A}\mathbf{x}}(2\mathbf{A} + 4\mathbf{A}\mathbf{x}\mathbf{x}^\top\mathbf{A})}.
+\]
+
 \subsection{Question 5}
+
+Soit $f(\mathbf{x}) = \|\mathbf{A}\mathbf{x}\|^2 = (\mathbf{A}\mathbf{x})^\top(\mathbf{A}\mathbf{x}) = \mathbf{x}^\top\mathbf{A}^\top\mathbf{A}\mathbf{x}$. % chktex 3
+
+\textbf{Réponse~: (a)} $\nabla_{\mathbf{x}} f(\mathbf{x}) = 2\mathbf{A}^\top\mathbf{A}\mathbf{x}$.
+
+\textbf{Justification.}
+Posons $\mathbf{B} = \mathbf{A}^\top\mathbf{A}$. La matrice $\mathbf{B}$ est symétrique car $\mathbf{B}^\top = (\mathbf{A}^\top\mathbf{A})^\top = \mathbf{A}^\top\mathbf{A} = \mathbf{B}$. % chktex 3
+Alors $f(\mathbf{x}) = \mathbf{x}^\top\mathbf{B}\mathbf{x}$ et
+\[
+\nabla f = (\mathbf{B}+\mathbf{B}^\top)\mathbf{x} = 2\mathbf{B}\mathbf{x} = \boxed{2\mathbf{A}^\top\mathbf{A}\mathbf{x}}.
+\]
+
 \subsection{Question 6}
+
+Même fonction $f(\mathbf{x}) = \|\mathbf{A}\mathbf{x}\|^2 = \mathbf{x}^\top\mathbf{A}^\top\mathbf{A}\mathbf{x}$.
+
+\textbf{Réponse~: (a)} $\nabla^2_{\mathbf{x}} f(\mathbf{x}) = 2\mathbf{A}^\top\mathbf{A}$.
+
+\textbf{Justification.}
+Le gradient est $\nabla f(\mathbf{x}) = 2\mathbf{A}^\top\mathbf{A}\mathbf{x}$. On dérive une seconde fois~:
+\[
+\nabla^2_{\mathbf{x}} f(\mathbf{x}) = \frac{\partial}{\partial \mathbf{x}}(2\mathbf{A}^\top\mathbf{A}\mathbf{x}) = \boxed{2\mathbf{A}^\top\mathbf{A}}.
+\]
 
 \section{Problème 2: Optimisation, Descentes de Gradient vs Newton et analyse spectrale}
 \subsection{a}
