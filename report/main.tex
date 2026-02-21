@@ -86,10 +86,102 @@ Le dépôt GitHub~\cite{repo} contient le code complet, structuré et prêt à �
 \subsection{g}
 
 \section{Problème 3: Estimation par la Méthode du Maximum de Vraisemblance et Probabilités des Estimateurs}
-\subsection{a}
-\subsection{b}
-\subsection{c}
-\subsection{d}
+
+Soit $X_1, X_2, \ldots, X_n$ un échantillon aléatoire issu d'une \textbf{loi de Poisson} de paramètre $\lambda$:
+\[
+P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}, \quad k = 0, 1, 2, \ldots
+\]
+
+\subsection{a) Estimateur du maximum de vraisemblance de $\lambda$}
+
+\textbf{Fonction de vraisemblance.}
+\[
+L(\lambda; \mathbf{X}) = \prod_{i=1}^{n} \frac{\lambda^{X_i} e^{-\lambda}}{X_i!}
+= \frac{\lambda^{\sum_{i=1}^n X_i} \, e^{-n\lambda}}{\prod_{i=1}^n X_i!}.
+\]
+
+\textbf{Log-vraisemblance.}
+\[
+\ell(\lambda) = \log L(\lambda) = \left(\sum_{i=1}^n X_i\right) \log\lambda - n\lambda - \sum_{i=1}^n \log(X_i!).
+\]
+
+\textbf{Maximisation.} On dérive par rapport à $\lambda$ et on annule:
+\[
+\frac{d\ell}{d\lambda} = \frac{\sum_{i=1}^n X_i}{\lambda} - n = 0
+\quad \Longrightarrow \quad
+\boxed{\hat{\lambda}_{\text{EMV}} = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i.}
+\]
+
+\textbf{Vérification (condition du second ordre).}
+$\displaystyle \frac{d^2\ell}{d\lambda^2} = -\frac{\sum_{i=1}^n X_i}{\lambda^2} < 0$,
+donc $\hat{\lambda}$ est bien un maximum.
+
+\subsection{b) Biais de l'estimateur}
+
+On calcule l'espérance de $\hat{\lambda}$:
+\[
+\mathbb{E}[\hat{\lambda}]
+= \mathbb{E}\!\left[\frac{1}{n}\sum_{i=1}^n X_i\right]
+= \frac{1}{n}\sum_{i=1}^n \mathbb{E}[X_i]
+= \frac{1}{n} \cdot n\lambda
+= \lambda.
+\]
+Le biais est $b(\hat{\lambda}) = \mathbb{E}[\hat{\lambda}] - \lambda = 0$.
+L'estimateur $\hat{\lambda} = \bar{X}$ est donc \textbf{non biaisé}.
+
+\subsection{c) Consistance de l'estimateur}
+
+Pour une variable de Poisson, $\text{Var}(X_i) = \lambda$. On a donc:
+\[
+\text{Var}(\hat{\lambda})
+= \text{Var}(\bar{X})
+= \frac{1}{n^2}\sum_{i=1}^n \text{Var}(X_i)
+= \frac{n\lambda}{n^2}
+= \frac{\lambda}{n}.
+\]
+
+L'erreur quadratique moyenne est:
+\[
+EQM(\hat{\lambda}_n) = \text{Var}(\hat{\lambda}_n) + [b(\hat{\lambda}_n)]^2 = \frac{\lambda}{n} + 0 = \frac{\lambda}{n}.
+\]
+
+Comme $\displaystyle \lim_{n \to \infty} EQM(\hat{\lambda}_n) = \lim_{n \to \infty} \frac{\lambda}{n} = 0$,
+l'estimateur $\hat{\lambda}$ est \textbf{consistant}.
+
+\subsection{d) Application numérique}
+
+On dispose des fréquences observées suivantes:
+
+\begin{center}
+\begin{tabular}{c|cccccc}
+$x$ & 0 & 1 & 2 & 3 & 4 & 5 \\ \hline
+$f_X(x)$ & 7 & 14 & 12 & 13 & 6 & 3
+\end{tabular}
+\end{center}
+
+\textbf{(i) EMV de $\lambda$.}
+Le nombre total d'observations est $n = 7+14+12+13+6+3 = 55$ et
+\[
+\sum_{i=1}^n X_i = 0(7) + 1(14) + 2(12) + 3(13) + 4(6) + 5(3) = 116.
+\]
+D'où
+\[
+\hat{\lambda} = \bar{X} = \frac{116}{55} \approx 2{,}1091.
+\]
+
+\textbf{(ii) Estimation de $P(X = 2)$.}
+On substitue $\hat{\lambda}$ dans la loi de Poisson:
+\[
+\hat{P}(X = 2) = \frac{\hat{\lambda}^2\, e^{-\hat{\lambda}}}{2!}
+= \frac{(116/55)^2\, e^{-116/55}}{2}
+\approx 0{,}2699.
+\]
+
+\textbf{Code et sortie.} Le code source est fourni au listing~\ref{lst:poisson-code} et la sortie au listing~\ref{lst:poisson-output}.
+
+\lstinputlisting[caption={Code Python pour l'EMV de la loi de Poisson (src/3.py)}, label={lst:poisson-code}]{../src/3.py}
+
+\lstinputlisting[caption={Sortie du programme (output/3.txt)}, label={lst:poisson-output}, numbers=none, basicstyle=\ttfamily\small]{../output/3.txt}
 
 \section{Problème 4: Test F de Fisher et Intervalle de Confiance}
 
@@ -193,7 +285,7 @@ Cela illustre le \textbf{théorème central limite}:
 \sqrt{n}\,\frac{\overline{X}_n - \mu}{\sigma} \xrightarrow{\mathcal{L}} \mathcal{N}(0, 1).
 \]
 
-\lstinputlisting[caption={Code Python~- Th{\'e}or{\`e}me central limite (src/5\_3.py)}, label={lst:5-3}]{../src/5_3.py}
+\lstinputlisting[caption={Code Python~- Th{\'e}or{\`e}me central limite (src/5\_3.py)}, label={lst:5~-3}]{../src/5_3.py}
 
 \begin{thebibliography}{9}
 \bibitem{repo}
