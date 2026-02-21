@@ -185,7 +185,7 @@ On substitue $\hat{\lambda}$ dans la loi de Poisson:
 
 \section{Problème 4: Test F de Fisher et Intervalle de Confiance}
 
-\subsection{a}
+\subsection{a) Test F de Fisher} % chktex 9 chktex 10
 \textbf{Hypothèses.} On teste
 \(H_0: \sigma_A^2 = \sigma_B^2\) contre \(H_1: \sigma_A^2 \neq \sigma_B^2\) (test bilatéral), avec \(\alpha = 0.05\).
 
@@ -193,7 +193,7 @@ Les variances d'échantillon calculées sont \(s_A^2 = 16.988889\) et \(s_B^2 = 
 Les valeurs critiques pour \((\nu_1, \nu_2) = (9, 9)\) sont \(F_{0.025} = 0.248386\) et \(F_{0.975} = 4.025994\), et la p-valeur vaut \(0.464710\).
 Comme \(F_{\text{stat}}\) est dans la région d'acceptation et \(p > 0.05\), on ne rejette pas \(H_0\): il n'y a pas d'évidence d'une différence de variances au seuil de 5\%.
 
-\subsection{b}
+\subsection{b) Visualisation} % chktex 9 chktex 10
   \begin{figure}[H]
   \centering
   \includegraphics[width=0.85\textwidth]{../output/4.png}
@@ -202,14 +202,14 @@ Comme \(F_{\text{stat}}\) est dans la région d'acceptation et \(p > 0.05\), on 
 \end{figure}
 
 La figure~\ref{fig:fisher-f} montre la densité \(F(9,9)\), les régions critiques (en rouge) et la position de \(F_{\text{stat}}\), qui se situe hors des zones de rejet.
-\subsection{c}
+\subsection{c) Intervalle de confiance} % chktex 9 chktex 10
 \textbf{Intervalle de confiance à 95\% pour \(\sigma_A^2 / \sigma_B^2\).}
 En utilisant les quantiles \(F_{0.025}\) et \(F_{0.975}\), l'intervalle est
 \[
 \left[\frac{F_{\text{stat}}}{F_{0.975}}, \frac{F_{\text{stat}}}{F_{0.025}}\right]=[0.411019,\; 6.662062].
 \]
 
-\subsection{d}
+\subsection{d) Code, sortie et interprétation} % chktex 9 chktex 10
 \textbf{Code et sortie.} Le code source est fourni au listing~\ref{lst:fisher-code} et la sortie correspondante au listing~\ref{lst:fisher-output}.
 
 \lstinputlisting[caption={Code Python pour le test F et l'intervalle de confiance (src/4.py)}, label={lst:fisher-code}]{../src/4.py}
