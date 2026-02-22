@@ -100,7 +100,7 @@ def main():
     plt.plot([np.linalg.norm(grad_f(x)) for x in hist_gd], label="GD")
     plt.plot([np.linalg.norm(grad_f(x)) for x in hist_nt], label="Newton")
     plt.yscale("log")
-    plt.xlabel(r"it\'eration $k$")
+    plt.xlabel("itération $k$")
     plt.ylabel(r"$\|\nabla f(x_k)\|$")
     plt.legend()
     plt.title("Evolution de la norme du gradient")

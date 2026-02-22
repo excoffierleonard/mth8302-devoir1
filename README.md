@@ -38,4 +38,4 @@ Cela exécute tous les scripts Python (génère figures et fichiers texte dans `
 
 ## Visualisation
 
-Le rapport compilé se trouve dans `MTH8302_ExcoffierLeonard_2085276_Devoir1.pdf` à la racine du projet après exécution de `run.sh`.
+Le rapport compilé se trouve dans [`MTH8302_ExcoffierLeonard_2085276_Devoir1.pdf`](MTH8302_ExcoffierLeonard_2085276_Devoir1.pdf) à la racine du projet après exécution de `run.sh`.
