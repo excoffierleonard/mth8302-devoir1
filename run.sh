@@ -13,7 +13,8 @@ echo "All scripts completed."
 
 echo "Compiling LaTeX..."
 cd report
-pdflatex -interaction=nonstopmode main.tex > /dev/null
-pdflatex -interaction=nonstopmode main.tex > /dev/null
-cp main.pdf ../output/main.pdf
-echo "PDF written to output/main.pdf"
+TEX_NAME="MTH8302_ExcoffierLeonard_2085276_Devoir1"
+pdflatex -interaction=nonstopmode "$TEX_NAME.tex" > /dev/null
+pdflatex -interaction=nonstopmode "$TEX_NAME.tex" > /dev/null
+cp "$TEX_NAME.pdf" "../$TEX_NAME.pdf"
+echo "PDF written to $TEX_NAME.pdf"
