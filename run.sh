@@ -2,9 +2,11 @@
 
 set -e
 
+cd "$(dirname "$0")"
+
 for script in src/2.py src/3.py src/4.py src/5_1.py src/5_2.py src/5_3.py; do
     echo "Running $script..."
-    python3 "$script"
+    uv run "$script"
 done
 
 echo "All scripts completed."
